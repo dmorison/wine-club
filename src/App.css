@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -15,13 +11,14 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  text-align: center;
 }
 
 .App-link {
@@ -35,4 +32,41 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.section {
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 769px) {
+  .section {
+    width: 50%;
+  }
+}
+
+.wineCard {
+  padding: 12px;
+  border: 2px solid #282c34;
+  margin: 20px;
+  border-radius: 8px;
+}
+
+.wineCard h2 {
+  text-align: center;
+}
+
+.wine-img {
+  display: block;
+  width: 150px;
+  height: auto;
+  border: 3px solid #282c34;
+  border-radius: 3px;
+  margin: 0 auto;
+}
+
+.wine-stats, td {
+  padding: 4px;
+  border: 1px solid #282c34;
+  border-collapse: collapse;
 }
