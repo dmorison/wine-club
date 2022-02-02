@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 
+import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse'
+
 // import { getData } from './utils/API';
 import { formatData } from './utils/formatData';
 const testData = require('./utils/testData.json');
 
 const App = () => {
   const [wines, setWines] = useState([]);
+  const [info, setInfo] = useState(null);
 
   useEffect(() => {
     getWines();
@@ -28,6 +32,14 @@ const App = () => {
     }
   }
 
+  const handleInfo = (e, wine) => {
+    if (info === wine) {
+      setInfo(null);
+    } else {
+      setInfo(wine);
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -40,25 +52,36 @@ const App = () => {
               <div key={wine.id} className="wineCard">
                 <h2>{wine.wine}</h2>
                 <img className="wine-img" src={process.env.PUBLIC_URL + `images/${wine.id}.jpg`} alt="wine image" />
-                <p><strong>{wine.owner}</strong></p>
-                <table className="wine-stats">
-                  <tbody>
-                    <tr>
-                      <td>Ranked</td>
-                      <td>{wine.position}</td>
-                    </tr>
-                    <tr>
-                      <td>Tasting order</td>
-                      <td>{wine.tasting_order}</td>
-                    </tr>
-                    <tr>
-                      <td>Total score</td>
-                      <td>{wine.total_score}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p><strong>Who's favourite was it:</strong><br />{wine.favourite}</p>
-                <p><strong>Who gave it their lowest score:</strong><br />{wine.worst}</p>
+                <Button
+                  onClick={(e) => handleInfo(e, wine.id)}
+                  aria-controls="example-collapse-text"
+                  aria-expanded={info}
+                >
+                  {info === wine.id ? "less info" : "more info"}
+                </Button>
+                <Collapse in={info === wine.id ? true : false}>
+                  <div id="example-collapse-text">
+                    <p><strong>{wine.owner}</strong></p>
+                    <table className="wine-stats">
+                      <tbody>
+                        <tr>
+                          <td>Ranked</td>
+                          <td>{wine.position}</td>
+                        </tr>
+                        <tr>
+                          <td>Tasting order</td>
+                          <td>{wine.tasting_order}</td>
+                        </tr>
+                        <tr>
+                          <td>Total score</td>
+                          <td>{wine.total_score}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p><strong>Who's favourite was it:</strong><br />{wine.favourite}</p>
+                    <p><strong>Who gave it their lowest score:</strong><br />{wine.worst}</p>
+                  </div>
+                </Collapse>
               </div>
             )
           })}
