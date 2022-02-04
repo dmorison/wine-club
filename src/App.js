@@ -6,9 +6,9 @@ import Collapse from 'react-bootstrap/Collapse'
 
 import logo from "./media/welcome.jpg";
 
-// import { getData } from './utils/API';
+import { getData } from './utils/API';
 import { formatData } from './utils/formatData';
-const testData = require('./utils/testData.json');
+// const testData = require('./utils/testData.json');
 
 const App = () => {
   const [wines, setWines] = useState([]);
@@ -20,14 +20,14 @@ const App = () => {
 
   const getWines = async () => {
     try {
-      // const { data } = await getData();
-      const data = testData;
-      console.log(data);
+      const { data } = await getData();
+      // const data = testData;
+      // console.log(data);
       const dataValues = data.valueRanges;
       const wineData = formatData(dataValues[0].values);
-      console.log(wineData);
+      // console.log(wineData);
       const memberData = formatData(dataValues[1].values);
-      console.log(memberData);
+      // console.log(memberData);
       setWines(wineData);
     } catch (err) {
       console.log(err);
@@ -76,8 +76,8 @@ const App = () => {
                           <td>{wine.tasting_order}</td>
                         </tr>
                         <tr>
-                          <td>Total score</td>
-                          <td>{wine.total_score}</td>
+                          <td>Average score</td>
+                          <td>{wine.average_score}</td>
                         </tr>
                       </tbody>
                     </table>
