@@ -4,6 +4,8 @@ import './App.css';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse'
 
+import logo from "./media/welcome.jpg";
+
 // import { getData } from './utils/API';
 import { formatData } from './utils/formatData';
 const testData = require('./utils/testData.json');
@@ -43,7 +45,8 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>De Wijn Club</h1>
+        <img className="logo" src={logo} alt="De Wijn Klub Logo" />
+        {/* <h1>De Wijn Club</h1> */}
       </header>
       <container>
         <div className="section">
@@ -57,7 +60,7 @@ const App = () => {
                   aria-controls="example-collapse-text"
                   aria-expanded={info}
                 >
-                  {info === wine.id ? "less info" : "more info"}
+                  {info === wine.id ? "Less info" : "More info"}
                 </Button>
                 <Collapse in={info === wine.id ? true : false}>
                   <div id="example-collapse-text">
@@ -87,6 +90,9 @@ const App = () => {
           })}
         </div>
       </container>
+      <footer>
+        <p>De Wijn Klub - Drink wine, be happy</p>
+      </footer>
     </div>
   );
 }
