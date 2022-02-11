@@ -4,15 +4,20 @@ import './App.css';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse'
 
+import EventDate from './EventDate';
+
 import logo from "./media/welcome.jpg";
 
-import { getData } from './utils/API';
+// import { getData } from './utils/API';
 import { formatData } from './utils/formatData';
 // const testData = require('./utils/testData.json');
+const appData = require('./utils/appData.json');
 
 const App = () => {
   const [wines, setWines] = useState([]);
   const [info, setInfo] = useState(null);
+  const [show, setShow] = useState(false);
+  const [occasion, setOccasion] = useState(null);
 
   useEffect(() => {
     getWines();
@@ -20,13 +25,13 @@ const App = () => {
 
   const getWines = async () => {
     try {
-      const { data } = await getData();
-      // const data = testData;
-      // console.log(data);
+      // const { data } = await getData();
+      const data = appData;
+      console.log(data);
       const dataValues = data.valueRanges;
       const wineData = formatData(dataValues[0].values);
-      // console.log(wineData);
-      const memberData = formatData(dataValues[1].values);
+      console.log(wineData);
+      // const memberData = formatData(dataValues[1].values);
       // console.log(memberData);
       setWines(wineData);
     } catch (err) {
@@ -42,6 +47,17 @@ const App = () => {
     }
   }
 
+  const handleHide = () => setShow(false);
+
+  const handleShow = (e, occasion) => {
+    const occasionDate = wines.filter(item => {
+      return item.date === occasion;
+    });
+    console.log(occasionDate);
+    setOccasion(occasionDate);
+    setShow(true);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -54,6 +70,7 @@ const App = () => {
             return (
               <div key={wine.id} className="wineCard">
                 <h2>{wine.wine}</h2>
+                <h3>{wine.country}</h3>
                 <img className="wine-img" src={process.env.PUBLIC_URL + `images/${wine.id}.jpg`} alt="wine image" />
                 <Button
                   onClick={(e) => handleInfo(e, wine.id)}
@@ -65,6 +82,7 @@ const App = () => {
                 <Collapse in={info === wine.id ? true : false}>
                   <div id="example-collapse-text">
                     <p><strong>{wine.owner}</strong></p>
+                    <p>Date: <a onClick={(e) => handleShow(e, wine.date)}>{wine.date}</a></p>
                     <table className="wine-stats">
                       <tbody>
                         <tr>
@@ -76,7 +94,7 @@ const App = () => {
                           <td>{wine.tasting_order}</td>
                         </tr>
                         <tr>
-                          <td>Average score</td>
+                          <td>Average score /20</td>
                           <td>{wine.average_score}</td>
                         </tr>
                       </tbody>
@@ -89,6 +107,7 @@ const App = () => {
             )
           })}
         </div>
+        <EventDate eventWines={occasion} show={show} handleHide={handleHide} />
       </container>
       <footer>
         <p>De Wijn Klub - Drink wine, be happy</p>

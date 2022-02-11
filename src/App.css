@@ -62,7 +62,7 @@ footer p {
   background-color: #e3e3e3;
 }
 
-.wineCard h2 {
+.wineCard {
   text-align: center;
 }
 
@@ -87,6 +87,7 @@ footer p {
 }
 
 .wine-stats, td {
+  text-align: left;
   padding: 4px;
   border: 1px solid #282c34 !important;
   border-collapse: collapse;
