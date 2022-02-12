@@ -1,0 +1,37 @@
+.modal-header {
+	background-color: #e3e3e3;
+	box-shadow: 0px 0px 16px -3px #282c34;
+	z-index: 1;
+}
+
+.modal-title-small {
+  font-size: 1.275rem;
+}
+
+.modal-body {
+	background-color: #f2f2fd;
+}
+
+.modal-body .container {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+table.table .selected {
+  font-weight: bold;
+}
+
+.wine-stats, td {
+	text-align: left;
+	padding-top: 12px;
+	border-collapse: collapse;
+}
+
+.wine-stats tr td:first-child {
+	padding-right: 10px;
+}
+
+.event-img {
+	border: 3px solid #282c34;
+  border-radius: 6px 6px 0px 0px;
+}
